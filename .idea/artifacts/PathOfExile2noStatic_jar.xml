@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PathOfExile2noStatic:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PathOfExile2noStatic_jar</output-path>
+    <root id="archive" name="PathOfExile2noStatic.jar">
+      <element id="module-output" name="PathOfExile2noStatic" />
+    </root>
+  </artifact>
+</component>
