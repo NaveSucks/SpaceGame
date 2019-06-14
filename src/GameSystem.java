@@ -44,7 +44,7 @@ public class GameSystem {
                 running = false;
             }
             if (shooting) shoot(xCoordinate, yCoordinate);
-            System.out.println(gameMobs.getCollectedCrystals() + "/" +levelRequirement);
+            //System.out.println(gameMobs.getCollectedCrystals() + "/" +levelRequirement);
 
             //check for game loss
         }
@@ -53,7 +53,7 @@ public class GameSystem {
         if(collectedCrystals > levelRequirement){
             Powerlevel.getInstance().incrementPowerlevel();
             levelRequirement += levelRequirement;
-            System.out.println(collectedCrystals + "/" +levelRequirement);
+            //System.out.println(collectedCrystals + "/" +levelRequirement);
         }
     }
 
@@ -73,13 +73,13 @@ public class GameSystem {
         p1.move(0, 1);
     }
 
-    public void drawPlayer(Graphics g, int resX, int resY, Entity.Direction direction) {
+    public void drawPlayer(Graphics g, int resX, int resY, double angle) {
         p1.draw(g, resX, resY);
-        p1.setDir(direction);
+        p1.setDir(p1.getDirection(angle));
     }
 
     public void drawMobs(Graphics g, int resX, int resY) {
-        gameMobs.drawAllMobs(g, resX, resY, offsetX, offsetY);
+        gameMobs.drawAllMobs(g, resX, resY, offsetX, offsetY, p1.getPosX(), p1.getPosY());
     }
 
     public void shoot(int mouseX, int mouseY) {

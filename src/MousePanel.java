@@ -42,7 +42,7 @@ public class MousePanel extends JPanel
         playerBullets.shoot(g, getWidth()/2,getHeight()/2, mousePosX, mousePosY, shooting);
 
         gameSystem.drawMobs(g, width, height);
-        gameSystem.drawPlayer(g, width, height, playerDirection());
+        gameSystem.drawPlayer(g, width, height, angle);
         g.setColor(Color.gray);
         g.drawRect((100 - gameSystem.getOffsetX()) * width / 1000, (100 - gameSystem.getOffsetY()) * height / 1000, 800 * width / 1000, 800 * height / 1000);
         if (gameSystem.lost()) {
@@ -126,33 +126,9 @@ public class MousePanel extends JPanel
     }
     private void playerAngle(){
         angle = Math.toDegrees(Math.atan2(mousePosY - getHeight() / 2, mousePosX - getWidth() / 2));
-
-        if (angle < 0) {
-            angle += 360;
-        }
-
     }
 
-    private Entity.Direction playerDirection() {
 
-        if(angle > 348.75 || angle < 11.25)return Entity.Direction.E;
-        else if(angle < 33.75)return Entity.Direction.SEE;
-        else if(angle < 56.25)return Entity.Direction.SE;
-        else if(angle < 78.75)return Entity.Direction.SSE;
-        else if(angle < 101.25)return Entity.Direction.S;
-        else if(angle < 123.75)return Entity.Direction.SSW;
-        else if(angle < 146.25)return Entity.Direction.SW;
-        else if(angle < 168.75)return Entity.Direction.SWW;
-        else if(angle < 191.25)return Entity.Direction.W;
-        else if(angle < 213.75)return Entity.Direction.NWW;
-        else if(angle < 236.25)return Entity.Direction.NW;
-        else if(angle < 258.75)return Entity.Direction.NNW;
-        else if(angle < 281.25)return Entity.Direction.N;
-        else if(angle < 303.75)return Entity.Direction.NNE;
-        else if(angle < 326.25)return Entity.Direction.NE;
-        else if(angle < 348.75)return Entity.Direction.NEE;
-        return Entity.Direction.S;
-    }
 }
 
 

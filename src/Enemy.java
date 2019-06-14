@@ -12,58 +12,105 @@ public class Enemy extends Entity {
     private int safeZone = 40;
     private Random rng = new Random();
     private BufferedImage enemyN;
+    private BufferedImage enemyNNE;
     private BufferedImage enemyNE;
+    private BufferedImage enemyNEE;
     private BufferedImage enemyE;
+    private BufferedImage enemySEE;
     private BufferedImage enemySE;
+    private BufferedImage enemySSE;
     private BufferedImage enemyS;
+    private BufferedImage enemySSW;
     private BufferedImage enemySW;
+    private BufferedImage enemySWW;
     private BufferedImage enemyW;
+    private BufferedImage enemyNWW;
     private BufferedImage enemyNW;
+    private BufferedImage enemyNNW;
 
 
     public Enemy() {
         randomSpawnPos();
         try {
-            enemyN = ImageIO.read(Enemy.class.getResource("enemyN.png"));
+            enemyN = ImageIO.read(Enemy.class.getResource("enemy2N.png"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         try {
-            enemyNE = ImageIO.read(Enemy.class.getResource("enemyNE.png"));
+            enemyNNE = ImageIO.read(Enemy.class.getResource("enemy2NNE.png"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         try {
-            enemyE = ImageIO.read(Enemy.class.getResource("enemyE.png"));
+            enemyNE = ImageIO.read(Enemy.class.getResource("enemy2NE.png"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         try {
-            enemySE = ImageIO.read(Enemy.class.getResource("enemySE.png"));
+            enemyNEE = ImageIO.read(Enemy.class.getResource("enemy2NEE.png"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         try {
-            enemyS = ImageIO.read(Enemy.class.getResource("enemyS.png"));
+            enemyE = ImageIO.read(Enemy.class.getResource("enemy2E.png"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         try {
-            enemySW = ImageIO.read(Enemy.class.getResource("enemySW.png"));
+            enemySEE = ImageIO.read(Enemy.class.getResource("enemy2SEE.png"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         try {
-            enemyW = ImageIO.read(Enemy.class.getResource("enemyW.png"));
+            enemySE = ImageIO.read(Enemy.class.getResource("enemy2SE.png"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         try {
-            enemyNW = ImageIO.read(Enemy.class.getResource("enemyNW.png"));
+            enemySSE = ImageIO.read(Enemy.class.getResource("enemy2SSE.png"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-
+        try {
+            enemyS = ImageIO.read(Enemy.class.getResource("enemy2S.png"));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        try {
+            enemySSW = ImageIO.read(Enemy.class.getResource("enemy2SSW.png"));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        try {
+            enemySW = ImageIO.read(Enemy.class.getResource("enemy2SW.png"));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        try {
+            enemySWW = ImageIO.read(Enemy.class.getResource("enemy2SWW.png"));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        try {
+            enemyW = ImageIO.read(Enemy.class.getResource("enemy2W.png"));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        try {
+            enemyNWW = ImageIO.read(Enemy.class.getResource("enemy2NWW.png"));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        try {
+            enemyNW = ImageIO.read(Enemy.class.getResource("enemy2NW.png"));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        try {
+            enemyNNW = ImageIO.read(Enemy.class.getResource("enemy2NNW.png"));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 
     public int getAttack() {
@@ -103,28 +150,16 @@ public class Enemy extends Entity {
     }
 
     public void move(int xPosPlayer, int yPosPlayer, List<Enemy> mobList) {
-        boolean movedEast = false;
-        boolean movedWest = false;
-        boolean movedSouth = false;
-        boolean movedNorth = false;
-
         if (freeToMove(mobList)) {
-
-
-
             if (getPosX() < xPosPlayer - 20) {
                 moveX(enemySpeed);
-                movedEast = true;
             } else if (getPosX() > xPosPlayer + 20) {
                 moveX(-enemySpeed);
-                movedWest = true;
             }
             if (getPosY() < yPosPlayer - 20) {
                 moveY(enemySpeed);
-                movedSouth = true;
             } else if (getPosY() > yPosPlayer + 20) {
                 moveY(-enemySpeed);
-                movedNorth = true;
             }
         } else {
             switch (rng.nextInt(4)) {
@@ -144,14 +179,6 @@ public class Enemy extends Entity {
                     System.out.println("Ich putze hier nur");
             }
         }
-        if(movedNorth && !movedEast && !movedWest) setDir(Direction.N);
-        else if(movedEast && !movedNorth && !movedSouth) setDir(Direction.E);
-        else if (movedSouth && !movedEast && !movedWest) setDir(Direction.S);
-        else if (movedWest && !movedNorth && !movedSouth) setDir(Direction.W);
-        else if(movedEast && movedNorth) setDir(Direction.NE);
-        else if(movedEast && movedSouth) setDir(Direction.SE);
-        else if(movedWest && movedNorth) setDir(Direction.NW);
-        else if(movedWest && movedSouth) setDir(Direction.SW);
     }
 
 
@@ -167,11 +194,18 @@ public class Enemy extends Entity {
         return true;
     }
 
-    public void draw(Graphics g, int resX, int resY, int offsetX, int offsetY){
+    public void draw(Graphics g, int resX, int resY, int offsetX, int offsetY, int playerX, int playerY){
         int visualPosX = (getPosX() - offsetX)* resX/1000 - resX/30;
         int visualPosY = (getPosY() - offsetY)* resY/1000 - resY/30;
-        BufferedImage image;
-        switch (getDir()){
+        double angle = 0;
+        //Winkel zwischen Spieler und enemy durch Vektor
+       if(true ||getPosX()-playerX != 0){
+           angle = Math.toDegrees(Math.atan2(playerY - getPosY(), playerX - getPosX()));
+       }
+       BufferedImage image;
+       //System.out.println(angle + " " + getDirection(angle));
+
+        switch (getDirection(angle)){
             case S:
                 image = enemyS;
                 break;
@@ -196,11 +230,34 @@ public class Enemy extends Entity {
             case SW:
                 image = enemySW;
                 break;
+            case SEE:
+                image = enemySEE;
+                break;
+            case NWW:
+                image = enemyNWW;
+                break;
+            case NEE:
+                image = enemyNEE;
+                break;
+            case SWW:
+                image = enemySWW;
+                break;
+            case SSE:
+                image = enemySSE;
+                break;
+            case NNW:
+                image = enemyNNW;
+                break;
+            case NNE:
+                image = enemyNNE;
+                break;
+            case SSW:
+                image = enemySSW;
+                break;
             default:
                 image = enemyS;
 
         }
-        //g.drawImage(image, visualPosX, visualPosY, null);
         g.drawImage(image, visualPosX, visualPosY, resX/15,resX/15,null);
         drawHealth(g,resX,resY,offsetX,offsetY,visualPosX,visualPosY);
     }

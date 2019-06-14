@@ -28,7 +28,6 @@ public class Powerlevel {
             bulletSize += 2;
             damage = damage + 1 + 1 * level / 3;
         }
-        //System.out.println(level + " shash:" + damage + " speed:" + bulletSpeed);
     }
     public int getBulletSpeed() {
         return bulletSpeed;

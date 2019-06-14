@@ -41,12 +41,12 @@ public class Mobs {
         }
     }
 
-    public void drawAllMobs(Graphics g, int resX, int resY, int offsetX, int offsetY) {
+    public void drawAllMobs(Graphics g, int resX, int resY, int offsetX, int offsetY, int playerX, int playerY ) {
         for (int i = 0; i < crystalList.size(); i++) {
             crystalList.get(i).draw(g, resX, resY, offsetX, offsetY);
         }
         for (int i = 0; i < mobList.size(); i++) {
-            mobList.get(i).draw(g, resX, resY, offsetX, offsetY);
+            mobList.get(i).draw(g, resX, resY, offsetX, offsetY, playerX, playerY);
         }
 
     }
@@ -61,7 +61,6 @@ public class Mobs {
                     int rng = random.nextInt(100);
                     if(rng > 90)
                         crystalList.add(new Crystal(mobList.get(i).getPosX(), mobList.get(i).getPosY()));
-                    //System.out.println("tot bei: " + mobList.get(i).getPosX() + " " + mobList.get(i).getPosY());
                     mobList.remove(i);
 
                 } else {
