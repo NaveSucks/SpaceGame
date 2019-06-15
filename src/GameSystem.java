@@ -18,6 +18,7 @@ public class GameSystem {
     }
 
     public void tick(boolean shooting, int xCoordinate, int yCoordinate) {
+
         if (running) {
             int playerX = p1.getPosX();
             int playerY = p1.getPosY();
@@ -26,12 +27,12 @@ public class GameSystem {
             offsetY = p1.getPosY() - 500;
 
             tickNumber++;
-
             //regen Player life
             if (p1.getHealth() < 100) {
                 p1.damage(-p1.getLifeRegen()); //heal 1 hp per tick
             }
             //mob spawns
+
             if (Math.random() > 1 - spawnMultiplier * Math.log(tickNumber)) {
                 gameMobs.add();
             }

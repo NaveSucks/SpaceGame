@@ -11,6 +11,7 @@ public class Mobs {
     public void add() {
         Enemy e = new Enemy();
         mobList.add(e);
+
     }
 
 

@@ -39,11 +39,11 @@ public class Background {
     }
     public void draw(Graphics g, int resX, int resY, int offsetX, int offsetY){
 
-        g.drawImage(b5,(int)(-offsetX*0.05), (int)(-offsetY*0.05), resX,resX, null);
+        g.drawImage(b5,(int)(-offsetX*0.05), (int)(-offsetY*0.05), (int)(resX*1.5),(int)(resX*1.5), null);
        // g.drawImage(b4,(int)(offsetX*0.1), (int)(offsetY*0.1), resX,resX, null);
-        g.drawImage(b3,(int)(-offsetX*0.1), (int)(-offsetY*0.2), resX,resX, null);
+        g.drawImage(b3,(int)(-offsetX*0.1), (int)(-offsetY*0.2), (int)(resX*1.5),(int)(resX*1.5), null);
        // g.drawImage(b2,(int)(offsetX*0.3), (int)(offsetY*0.3), resX,resX, null);
-        g.drawImage(b1,(int)(-offsetX*0.2), (int)(-offsetY*0.4), resX,resX, null);
+        g.drawImage(b1,(int)(-offsetX*0.2), (int)(-offsetY*0.4), (int)(resX*1.5),(int)(resX*1.5), null);
 
 
     }

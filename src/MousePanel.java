@@ -119,6 +119,7 @@ public class MousePanel extends JPanel
         int xCoordinate = (mousePosX * 1000 / getWidth()) + gameSystem.getOffsetX();
         int yCoordinate = (mousePosY * 1000 / getHeight()) + gameSystem.getOffsetY();
         gameSystem.tick(shooting, xCoordinate, yCoordinate);
+
         playerAngle();
         repaint();
 
@@ -127,8 +128,6 @@ public class MousePanel extends JPanel
     private void playerAngle(){
         angle = Math.toDegrees(Math.atan2(mousePosY - getHeight() / 2, mousePosX - getWidth() / 2));
     }
-
-
 }
 
 

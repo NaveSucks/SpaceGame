@@ -29,11 +29,9 @@ public class Bullets {
                 first.setDeltaX(deltaX);
                 first.setDeltaY(deltaY);
                 positions.add(0, first);
-                //System.out.println(j);
             }
         }
         if (positions.size() > 200) {
-            //System.out.println(positions.size());
             for(int i = 0; i < Powerlevel.getInstance().getBulletAmount();i++){
                 positions.removeLast();
             }
