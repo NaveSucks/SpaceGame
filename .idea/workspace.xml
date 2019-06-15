@@ -7,29 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5432f23-554e-404f-b86c-c4a47abd748f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ImageLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/PathOfExile2noStatic_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/PathOfExile2noStatic_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/PathOfExile2noStatic_jar/yeet.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/PathOfExile2noStatic_jar/yeet.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/Background.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/Background.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/Bullets.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/Bullets.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/Enemy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/GameFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/GameFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/GameSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/GameSystem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/Mobs.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/Mobs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/MousePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/MousePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/backupMETA-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Background.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Background.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bullets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bullets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Mobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mobs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MousePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MousePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backupMETA-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/Enemy$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathOfExile2noStatic/Enemy$1.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -263,7 +242,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560602797187" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560603129862" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -322,12 +301,20 @@
       <workItem from="1560468686435" duration="6832000" />
       <workItem from="1560476955484" duration="131000" />
       <workItem from="1560518275301" duration="4014000" />
-      <workItem from="1560595079870" duration="5928000" />
+      <workItem from="1560595079870" duration="6175000" />
     </task>
+    <task id="LOCAL-00001" summary="fixed tick lag by letting the newly created ImageLoader Class load bufferedImages instead of object loading them all the time">
+      <created>1560603129293</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1560603129293</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73472000" />
+    <option name="totallyTimeSpent" value="73719000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -401,6 +388,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixed tick lag by letting the newly created ImageLoader Class load bufferedImages instead of object loading them all the time" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed tick lag by letting the newly created ImageLoader Class load bufferedImages instead of object loading them all the time" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/enemyW.png">
