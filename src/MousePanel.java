@@ -43,6 +43,7 @@ public class MousePanel extends JPanel
 
         gameSystem.drawMobs(g, width, height);
         gameSystem.drawPlayer(g, width, height, angle);
+        gameSystem.drawPowerLevel(g, width, height);
         g.setColor(Color.gray);
         g.drawRect((100 - gameSystem.getOffsetX()) * width / 1000, (100 - gameSystem.getOffsetY()) * height / 1000, 800 * width / 1000, 800 * height / 1000);
         if (gameSystem.lost()) {

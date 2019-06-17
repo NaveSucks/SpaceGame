@@ -58,6 +58,12 @@ public class GameSystem {
         }
     }
 
+    public void drawPowerLevel(Graphics g, int resX, int resY){
+        g.setColor(Color.cyan);
+        g.drawString(String.valueOf(gameMobs.getCollectedCrystals()), (int)(resX*0.8), (int)(resY* 0.8));
+        g.drawString("    of " +String.valueOf(levelRequirement), (int)(resX*0.8), (int)(resY* 0.8));
+    }
+
     public void movePlayerLeft() {
         p1.move(-1, 0);
     }

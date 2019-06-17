@@ -54,4 +54,8 @@ public class Powerlevel {
         return bulletColor;
     }
 
+    public void draw(Graphics g){
+
+    }
+
 }
