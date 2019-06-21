@@ -22,21 +22,25 @@ public class GameSystem {
         if (running) {
             int playerX = p1.getPosX();
             int playerY = p1.getPosY();
-
             offsetX = p1.getPosX() - 500;
             offsetY = p1.getPosY() - 500;
 
             tickNumber++;
+
             //regen Player life
+
             if (p1.getHealth() < 100) {
                 p1.damage(-p1.getLifeRegen()); //heal 1 hp per tick
             }
+
             //mob spawns
 
             if (Math.random() > 1 - spawnMultiplier * Math.log(tickNumber)) {
                 gameMobs.add();
             }
+
             //enemy movement
+
             gameMobs.moveAllMobs(playerX, playerY);
             gameMobs.crystalPickup(playerX, playerY);
             levelPower(gameMobs.getCollectedCrystals());
@@ -45,8 +49,6 @@ public class GameSystem {
                 running = false;
             }
             if (shooting) shoot(xCoordinate, yCoordinate);
-            //System.out.println(gameMobs.getCollectedCrystals() + "/" +levelRequirement);
-
             //check for game loss
         }
     }
@@ -54,7 +56,6 @@ public class GameSystem {
         if(collectedCrystals > levelRequirement){
             Powerlevel.getInstance().incrementPowerlevel();
             levelRequirement += levelRequirement;
-            //System.out.println(collectedCrystals + "/" +levelRequirement);
         }
     }
 

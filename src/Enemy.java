@@ -11,22 +11,8 @@ public class Enemy extends Entity {
     private int enemySpeed = 2;
     private int safeZone = 40;
     private static Random rng = new Random();
-    private BufferedImage enemyN    = ImageLoader.getInstance().enemyN  ;
-    private BufferedImage enemyNNE  = ImageLoader.getInstance().enemyNNE;
-    private BufferedImage enemyNE   = ImageLoader.getInstance().enemyNE ;
-    private BufferedImage enemyNEE  = ImageLoader.getInstance().enemyNEE;
-    private BufferedImage enemyE    = ImageLoader.getInstance().enemyE  ;
-    private BufferedImage enemySEE  = ImageLoader.getInstance().enemySEE;
-    private BufferedImage enemySE   = ImageLoader.getInstance().enemySE ;
-    private BufferedImage enemySSE  = ImageLoader.getInstance().enemySSE;
-    private BufferedImage enemyS    = ImageLoader.getInstance().enemyS  ;
-    private BufferedImage enemySSW  = ImageLoader.getInstance().enemySSW;
-    private BufferedImage enemySW   = ImageLoader.getInstance().enemySW ;
-    private BufferedImage enemySWW  = ImageLoader.getInstance().enemySWW;
-    private BufferedImage enemyW    = ImageLoader.getInstance().enemyW  ;
-    private BufferedImage enemyNWW  = ImageLoader.getInstance().enemyNWW;
-    private BufferedImage enemyNW   = ImageLoader.getInstance().enemyNW ;
-    private BufferedImage enemyNNW  = ImageLoader.getInstance().enemyNNW;
+    public BufferedImage[] enemyOneImages = ImageLoader.getInstance().enemyOneImages;
+
 
     public Enemy() {
         randomSpawnPos();
@@ -34,10 +20,6 @@ public class Enemy extends Entity {
 
     public int getAttack() {
         return attack;
-    }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
     }
 
     private void randomSpawnPos() {
@@ -69,6 +51,7 @@ public class Enemy extends Entity {
     }
 
     public void move(int xPosPlayer, int yPosPlayer, List<Enemy> mobList) {
+        //move enemy closer to player
         if (freeToMove(mobList)) {
             if (getPosX() < xPosPlayer - 20) {
                 moveX(enemySpeed);
@@ -80,7 +63,9 @@ public class Enemy extends Entity {
             } else if (getPosY() > yPosPlayer + 20) {
                 moveY(-enemySpeed);
             }
-        } else {
+        }
+        //move in random direction to get away from illegal position
+        else {
             switch (rng.nextInt(4)) {
                 case 0:
                     moveX(enemySpeed *4);
@@ -100,7 +85,7 @@ public class Enemy extends Entity {
         }
     }
 
-
+    //checks if an enemy ist free to move
     public boolean freeToMove(List<Enemy> mobList) {
         for (int i = 0; i < mobList.size(); i++) {
             if ((mobList.get(i).getPosX() > this.getPosX() - safeZone && mobList.get(i).getPosX() < this.getPosX() + safeZone) &&
@@ -114,69 +99,26 @@ public class Enemy extends Entity {
     }
 
     public void draw(Graphics g, int resX, int resY, int offsetX, int offsetY, int playerX, int playerY){
+        //logical position converted to visual position. explanation here: https://imgur.com/jVNKqU2
         int visualPosX = (getPosX() - offsetX)* resX/1000 - resX/30;
         int visualPosY = (getPosY() - offsetY)* resY/1000 - resY/30;
         double angle = 0;
-        //Winkel zwischen Spieler und enemy durch Vektor
+        //angle between player and enemy
        if(true ||getPosX()-playerX != 0){
            angle = Math.toDegrees(Math.atan2(playerY - getPosY(), playerX - getPosX()));
        }
        BufferedImage image;
-       //System.out.println(angle + " " + getDirection(angle));
 
-        switch (getDirection(angle)){
-            case S:
-                image = enemyS;
+        int i = 0;
+        image = enemyOneImages[0];
+        for (Direction direction : Direction.values()) {    //iteration of the 16 elements of the Direction enum
+            if(getDirection(angle) == direction){
+                image = enemyOneImages[i];
                 break;
-            case N:
-                image = enemyN;
-                break;
-            case E:
-                image = enemyE;
-                break;
-            case W:
-                image = enemyW;
-                break;
-            case SE:
-                image = enemySE;
-                break;
-            case NW:
-                image = enemyNW;
-                break;
-            case NE:
-                image = enemyNE;
-                break;
-            case SW:
-                image = enemySW;
-                break;
-            case SEE:
-                image = enemySEE;
-                break;
-            case NWW:
-                image = enemyNWW;
-                break;
-            case NEE:
-                image = enemyNEE;
-                break;
-            case SWW:
-                image = enemySWW;
-                break;
-            case SSE:
-                image = enemySSE;
-                break;
-            case NNW:
-                image = enemyNNW;
-                break;
-            case NNE:
-                image = enemyNNE;
-                break;
-            case SSW:
-                image = enemySSW;
-                break;
-            default:
-                image = enemyS;
-
+            }
+            i++;
         }
+        //draw said image
         g.drawImage(image, visualPosX, visualPosY, resX/15,resX/15,null);
         drawHealth(g,resX,resY,offsetX,offsetY,visualPosX,visualPosY);
     }

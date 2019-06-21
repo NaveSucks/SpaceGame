@@ -52,7 +52,6 @@ public class MousePanel extends JPanel
         }
     }
 
-
     @Override
     public void mouseClicked(MouseEvent e) {
 

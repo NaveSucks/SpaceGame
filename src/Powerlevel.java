@@ -20,10 +20,10 @@ public class Powerlevel {
     }
 
     public void incrementPowerlevel() {
-        if(level<14) {
+        if(level<19) {
             level++;
             bulletSpeed = bulletSpeed + 3 + 1 * level;
-            bulletColor = bulletColors[level / 3];
+            bulletColor = bulletColors[level / 4];
             bulletAmount = bulletAmount + 1;
             bulletSize += 2;
             damage = damage + 1 + 1 * level / 3;

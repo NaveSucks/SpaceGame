@@ -94,10 +94,26 @@ public abstract class Entity {
        }
    }
     public Entity.Direction getDirection(double angle) {
+  /*     angle -= 11.5;
+        double correspondingAngle = 270;
+        for (Direction direction : Direction.values()) {
+            if (angle < 0) {
+                angle += 360;
+            }
+            else if (angle > 360) {
+                angle -= 360;
+            }
+            if(correspondingAngle -22.5 < angle && angle < correspondingAngle){
+                System.out.println(correspondingAngle -22.5 + " < " + angle + " < " + correspondingAngle + " therefore "+ direction);
+                return direction;
+            }
+            correspondingAngle += 22.5;
+        }
+        return Direction.S;
+*/
         if (angle < 0) {
             angle += 360;
         }
-
         if(angle > 348.75 || angle < 11.25)return Entity.Direction.E;
         else if(angle < 33.75)return Entity.Direction.SEE;
         else if(angle < 56.25)return Entity.Direction.SE;
@@ -115,5 +131,6 @@ public abstract class Entity {
         else if(angle < 326.25)return Entity.Direction.NE;
         else if(angle < 348.75)return Entity.Direction.NEE;
         return Entity.Direction.S;
+
     }
 }
