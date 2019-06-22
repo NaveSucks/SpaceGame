@@ -7,11 +7,11 @@ import java.util.Random;
 
 public class Enemy extends Entity {
 
-    public int attack = 5;
+    private int attack = 5;
     private int enemySpeed = 2;
     private int safeZone = 40;
     private static Random rng = new Random();
-    public BufferedImage[] enemyOneImages = ImageLoader.getInstance().enemyOneImages;
+    private BufferedImage[] enemyOneImages = ImageLoader.getInstance().enemyOneImages;
 
 
     public Enemy() {
@@ -86,7 +86,7 @@ public class Enemy extends Entity {
     }
 
     //checks if an enemy ist free to move
-    public boolean freeToMove(List<Enemy> mobList) {
+    private boolean freeToMove(List<Enemy> mobList) {
         for (int i = 0; i < mobList.size(); i++) {
             if ((mobList.get(i).getPosX() > this.getPosX() - safeZone && mobList.get(i).getPosX() < this.getPosX() + safeZone) &&
                     mobList.get(i).getPosY() > this.getPosY() - safeZone && mobList.get(i).getPosY() < this.getPosY() + safeZone

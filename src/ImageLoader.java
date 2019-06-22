@@ -7,8 +7,19 @@ public class ImageLoader {
 
     public BufferedImage[] enemyOneImages = new BufferedImage[16];
     public BufferedImage[] playerImages = new BufferedImage[16];
+    public BufferedImage[] backgroundImages = new BufferedImage[16];
 
     private ImageLoader(){
+
+        //background images:
+
+        for(int i = 1; i<=5;i++){
+            try {
+                backgroundImages[i] = ImageIO.read(Enemy.class.getResource("images/b"+i+".png"));
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
 
         //enemy images:
 
@@ -16,7 +27,7 @@ public class ImageLoader {
         for (Entity.Direction direction : Entity.Direction.values()) {  //iteration of the 16 elements of the Direction enum
             String fileName = "enemy2" + direction +".png";
             try {
-                enemyOneImages[i] = ImageIO.read(Enemy.class.getResource(fileName));
+                enemyOneImages[i] = ImageIO.read(Enemy.class.getResource("images/"+fileName));
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
@@ -29,7 +40,7 @@ public class ImageLoader {
         for (Entity.Direction direction : Entity.Direction.values()) {  //iteration of the 16 elements of the Direction enum
             String fileName = direction +".png";
             try {
-                playerImages[j] = ImageIO.read(Enemy.class.getResource(fileName));
+                playerImages[j] = ImageIO.read(Enemy.class.getResource("images/"+fileName));
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }

@@ -52,17 +52,27 @@ public class GameSystem {
             //check for game loss
         }
     }
-    private void levelPower(int collectedCrystals){
-        if(collectedCrystals > levelRequirement){
+
+    private void levelPower(int collectedCrystals) {
+        if (collectedCrystals > levelRequirement) {
             Powerlevel.getInstance().incrementPowerlevel();
             levelRequirement += levelRequirement;
         }
     }
 
-    public void drawPowerLevel(Graphics g, int resX, int resY){
+    public void drawPowerLevel(Graphics g, int resX, int resY) {
+
+        g.drawString(String.valueOf(gameMobs.getCollectedCrystals()), (int) (resX * 0.8), (int) (resY * 0.8));
+        g.drawString("    of " + levelRequirement, (int) (resX * 0.8), (int) (resY * 0.8));
+        g.setColor(Color.gray);
+        g.fillRect((int)(resX * 0.7), (int) (resY * 0.85), (int) (resX * 0.3), (int) (resY * 0.15));
         g.setColor(Color.cyan);
-        g.drawString(String.valueOf(gameMobs.getCollectedCrystals()), (int)(resX*0.8), (int)(resY* 0.8));
-        g.drawString("    of " +String.valueOf(levelRequirement), (int)(resX*0.8), (int)(resY* 0.8));
+
+        double zahler = gameMobs.getCollectedCrystals()-levelRequirement/2;
+        double nenner = levelRequirement/2;
+        for (int i = 0; i < (int)(10*(zahler/nenner)); i++) {
+            g.fillRect((int)(0.705*resX + i*0.029*resX), (int)(resY*0.855), (int)(resX*0.026),(int)(resY*0.14));
+        }
     }
 
     public void movePlayerLeft() {

@@ -1,8 +1,6 @@
 import java.awt.*;
 
 public class Crystal extends Entity {
-    private int posX;
-    private int posY;
 
     public Crystal(int x, int y) {
         setPosX(x);

@@ -6,7 +6,7 @@ public class Player extends Entity {
     public int attack = Powerlevel.getInstance().getDamage();
     private int lifeRegen = 1;
     private int playerSpeed = 5;
-    public BufferedImage[] playerImages = ImageLoader.getInstance().playerImages;
+    private BufferedImage[] playerImages = ImageLoader.getInstance().playerImages;
 
 
     public Player() {
@@ -67,8 +67,17 @@ public class Player extends Entity {
             i++;
         }
         g.drawImage(image, resX / 2 - resX / 20, resY / 2 - resX / 20, resX / 10, resX / 10, null);
+        drawHealth(g,resX,resY);
     }
 
+    private void drawHealth(Graphics g, int resX, int resY){
+        g.setColor(Color.gray);
+        g.fillRect(0, (int)(resY*0.85), (int)(resX*0.3), (int)(resY*0.15));
+        g.setColor(Color.red);
+        for(int i = 0; i < (int)getHealth()/10; i++){
+            g.fillRect((int)(0.005*resX + i*0.029*resX), (int)(resY*0.855), (int)(resX*0.026),(int)(resY*0.14));
+        }
+    }
 }
 
 

@@ -37,11 +37,11 @@ public class Bullet extends Point {
     public void draw(Graphics g, int resX,int resY) {
         g.setColor(Powerlevel.getInstance().getBulletColor());
         size = Powerlevel.getInstance().getBulletSize();
-        g.fillOval(x - size/2 -20, y - size/2, size, size);
-        g.fillOval(x - size/2 +20, y - size/2, size, size);
+        g.fillOval(x - size/2  -resX/70, y - size/2, size, size);
+        g.fillOval(x - size/2  +resX/70, y - size/2, size, size);
         g.setColor(Color.white);
-        g.fillOval(x - size/2 -19, y - size/2 + 1, size - 2, size - 2);
-        g.fillOval(x - size/2 + 21, y - size/2 + 1, size - 2, size - 2);
+        g.fillOval(x - size/2  -resX/72, y - size/2 + 1, size - 2, size - 2);
+        g.fillOval(x - size/2  +resX/68, y - size/2 + 1, size - 2, size - 2);
     }
 
 }

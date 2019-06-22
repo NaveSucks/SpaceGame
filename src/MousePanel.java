@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.*;
@@ -20,8 +21,8 @@ public class MousePanel extends JPanel
     private int mousePosY = 0;
     private boolean shooting = false;
     private double angle = 0;
-    private Background background = new Background();
     private Bullets playerBullets = new Bullets();
+    private BufferedImage[] backgroundImages = ImageLoader.getInstance().backgroundImages;
 
 
     public MousePanel() {
@@ -36,20 +37,29 @@ public class MousePanel extends JPanel
 
         super.paint(g);
         setBackground(Color.gray);
-        background.draw(g,getWidth(),getHeight(),gameSystem.getOffsetX(),gameSystem.getOffsetY());
+        drawBackground(g,getWidth(),getHeight(),gameSystem.getOffsetX(),gameSystem.getOffsetY());
         int width = this.getWidth();
         int height = this.getHeight();
-        playerBullets.shoot(g, getWidth()/2,getHeight()/2, mousePosX, mousePosY, shooting);
-
-        gameSystem.drawMobs(g, width, height);
-        gameSystem.drawPlayer(g, width, height, angle);
-        gameSystem.drawPowerLevel(g, width, height);
         g.setColor(Color.gray);
         g.drawRect((100 - gameSystem.getOffsetX()) * width / 1000, (100 - gameSystem.getOffsetY()) * height / 1000, 800 * width / 1000, 800 * height / 1000);
+        playerBullets.shoot(g, getWidth()/2,getHeight()/2, mousePosX, mousePosY, shooting);
+        gameSystem.drawMobs(g, width, height);
+
+        gameSystem.drawPowerLevel(g, width, height);
+        gameSystem.drawPlayer(g, width, height, angle);
+
         if (gameSystem.lost()) {
             g.setColor(Color.red);
             g.fillRect(0,0,getWidth(),getHeight());
         }
+    }
+    public void drawBackground(Graphics g, int resX, int resY, int offsetX, int offsetY){
+
+        g.drawImage(backgroundImages[5],(int)(-offsetX*0.05), (int)(-offsetY*0.05), (int)(resX*1.5),(int)(resX*1.5), null);
+        // g.drawImage(backgroundImages[4],(int)(offsetX*0.1), (int)(offsetY*0.1), resX,resX, null);
+        g.drawImage(backgroundImages[3],(int)(-offsetX*0.1), (int)(-offsetY*0.2), (int)(resX*1.5),(int)(resX*1.5), null);
+        // g.drawImage(backgroundImages[2],(int)(offsetX*0.3), (int)(offsetY*0.3), resX,resX, null);
+        g.drawImage(backgroundImages[1],(int)(-offsetX*0.2), (int)(-offsetY*0.4), (int)(resX*1.5),(int)(resX*1.5), null);
     }
 
     @Override
@@ -69,25 +79,19 @@ public class MousePanel extends JPanel
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
-
     }
-
 
     @Override
     public void keyTyped(KeyEvent e) {
-
     }
 
     @Override
     public synchronized void keyPressed(KeyEvent e) {
         pressed.add(e.getKeyChar());
-
     }
 
     @Override
@@ -122,8 +126,6 @@ public class MousePanel extends JPanel
 
         playerAngle();
         repaint();
-
-
     }
     private void playerAngle(){
         angle = Math.toDegrees(Math.atan2(mousePosY - getHeight() / 2, mousePosX - getWidth() / 2));

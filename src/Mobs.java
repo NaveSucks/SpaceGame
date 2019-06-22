@@ -14,7 +14,6 @@ public class Mobs {
 
     }
 
-
     public void moveAllMobs(int xPosPlayer, int yPosPlayer) {
         for (int i = 0; i < mobList.size(); i++) {
             mobList.get(i).move(xPosPlayer, yPosPlayer, mobList);
