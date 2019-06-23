@@ -1,7 +1,9 @@
 import java.awt.*;
 
+//bullets only exist as eye candy. they dont actually exist in the logic of the gameSystem. they just look nice and give the player an idea of what he is doing
+
 public class Powerlevel {
-    private static final Powerlevel powerlevel = new Powerlevel();
+    private static final Powerlevel powerlevel= new Powerlevel();
     private int bulletSpeed = 40;
     private int bulletSize = 3;
     private int bulletAmount = 1;
@@ -46,16 +48,15 @@ public class Powerlevel {
         return damage;
     }
 
-    public int getLevel() {
-        return level;
+    public void reset(){
+        bulletSpeed = 40;
+        bulletSize = 3;
+        bulletAmount = 1;
+        damage = 4;
+        level = 1;
     }
 
     public Color getBulletColor() {
         return bulletColor;
     }
-
-    public void draw(Graphics g){
-
-    }
-
 }

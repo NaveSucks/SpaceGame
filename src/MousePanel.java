@@ -1,3 +1,8 @@
+import scoreSystem.HighDialog;
+import scoreSystem.HighScore;
+import scoreSystem.MineTimer;
+import scoreSystem.Score;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -14,15 +19,22 @@ import javax.swing.*;
 public class MousePanel extends JPanel
         implements KeyListener, MouseListener, ActionListener {
 
+    //set of pressed keys, so diagonal movement is possible
     private final Set<Character> pressed = new HashSet<Character>();
+
     private GameSystem gameSystem;
     private Timer timer = new Timer(25, this);
     private int mousePosX = 0;
     private int mousePosY = 0;
     private boolean shooting = false;
-    private double angle = 0;
+    MineTimer m = MineTimer.getInstance();
     private Bullets playerBullets = new Bullets();
     private BufferedImage[] backgroundImages = ImageLoader.getInstance().backgroundImages;
+
+    private boolean mouseOnHighscores;
+    private boolean mouseOnNewGame;
+
+    private boolean highScoreSaved = false;
 
 
     public MousePanel() {
@@ -36,35 +48,44 @@ public class MousePanel extends JPanel
     public void paint(Graphics g) {
 
         super.paint(g);
-        setBackground(Color.gray);
-        drawBackground(g,getWidth(),getHeight(),gameSystem.getOffsetX(),gameSystem.getOffsetY());
         int width = this.getWidth();
         int height = this.getHeight();
+        drawBackground(g,width,height,gameSystem.getOffsetX(),gameSystem.getOffsetY());
         g.setColor(Color.gray);
         g.drawRect((100 - gameSystem.getOffsetX()) * width / 1000, (100 - gameSystem.getOffsetY()) * height / 1000, 800 * width / 1000, 800 * height / 1000);
         playerBullets.shoot(g, getWidth()/2,getHeight()/2, mousePosX, mousePosY, shooting);
         gameSystem.drawMobs(g, width, height);
-
         gameSystem.drawPowerLevel(g, width, height);
-        gameSystem.drawPlayer(g, width, height, angle);
+        gameSystem.drawPlayer(g, width, height, playerAngle());
+        MineTimer.getInstance().draw(g,width,height);
 
         if (gameSystem.lost()) {
-            g.setColor(Color.red);
-            g.fillRect(0,0,getWidth(),getHeight());
+            GameOverScreen.draw(g, width, height, mouseOnHighscores, mouseOnNewGame);
         }
     }
-    public void drawBackground(Graphics g, int resX, int resY, int offsetX, int offsetY){
 
+    public void drawBackground(Graphics g, int resX, int resY, int offsetX, int offsetY){
         g.drawImage(backgroundImages[5],(int)(-offsetX*0.05), (int)(-offsetY*0.05), (int)(resX*1.5),(int)(resX*1.5), null);
-        // g.drawImage(backgroundImages[4],(int)(offsetX*0.1), (int)(offsetY*0.1), resX,resX, null);
         g.drawImage(backgroundImages[3],(int)(-offsetX*0.1), (int)(-offsetY*0.2), (int)(resX*1.5),(int)(resX*1.5), null);
-        // g.drawImage(backgroundImages[2],(int)(offsetX*0.3), (int)(offsetY*0.3), resX,resX, null);
         g.drawImage(backgroundImages[1],(int)(-offsetX*0.2), (int)(-offsetY*0.4), (int)(resX*1.5),(int)(resX*1.5), null);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
 
+        //checks which option gets chosen on the game over screen
+        if(gameSystem.lost()){
+            if(e.getX()<getWidth()/2){
+                new HighDialog();
+            }
+            if(e.getX()>getWidth()/2){
+                gameSystem = new GameSystem();
+                highScoreSaved = false;
+                MineTimer.getInstance().reset();
+                MineTimer.getInstance().start();
+                Powerlevel.getInstance().reset();
+            }
+        }
     }
 
     @Override
@@ -120,15 +141,30 @@ public class MousePanel extends JPanel
         if (pressed.contains('d')) {
             gameSystem.movePlayerRight();
         }
+        //logische Koordinate der angezielten Position errechnen
         int xCoordinate = (mousePosX * 1000 / getWidth()) + gameSystem.getOffsetX();
         int yCoordinate = (mousePosY * 1000 / getHeight()) + gameSystem.getOffsetY();
         gameSystem.tick(shooting, xCoordinate, yCoordinate);
-
-        playerAngle();
         repaint();
+        if(gameSystem.lost()){
+            if(!highScoreSaved) {
+                String name = JOptionPane.showInputDialog("What's your name?");
+                if (name.equals("")) {
+                    name = "player X";
+                }
+                MineTimer.getInstance().stop();
+                HighScore.getInstance().add(new Score(name, MineTimer.getInstance().spielzeit()));
+                HighScore.getInstance().store();
+                highScoreSaved = true;
+            }
+            System.out.println("test");
+            mouseOnHighscores = mousePosX<getWidth()/2;
+            mouseOnNewGame = mousePosX>getWidth()/2;
+        }
     }
-    private void playerAngle(){
-        angle = Math.toDegrees(Math.atan2(mousePosY - getHeight() / 2, mousePosX - getWidth() / 2));
+    //direction of player view relative to the panel in degrees
+    private double playerAngle(){
+        return Math.toDegrees(Math.atan2(mousePosY - getHeight() / 2, mousePosX - getWidth() / 2));
     }
 }
 

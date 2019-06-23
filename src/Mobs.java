@@ -14,11 +14,15 @@ public class Mobs {
 
     }
 
+    //moves all mobs closer to the player
+
     public void moveAllMobs(int xPosPlayer, int yPosPlayer) {
         for (int i = 0; i < mobList.size(); i++) {
             mobList.get(i).move(xPosPlayer, yPosPlayer, mobList);
         }
     }
+
+    //returns how much damage the player takes
 
     public int damageOnPlayer(int xPosPlayer, int yPosPlayer) {
         int damage = 0;
@@ -31,6 +35,8 @@ public class Mobs {
         return damage;
     }
 
+    //checks if player picks up crystals (blue circles)
+
     public void crystalPickup(int xPosPlayer, int yPosPlayer) {
         for (int i = 0; i < crystalList.size(); i++) {
             if (crystalList.get(i).getPosX() < xPosPlayer + 60 && crystalList.get(i).getPosY() < yPosPlayer + 60
@@ -41,6 +47,8 @@ public class Mobs {
         }
     }
 
+    //draws all enemy mobs RELATIVE to the player, therefore offsets are involved
+
     public void drawAllMobs(Graphics g, int resX, int resY, int offsetX, int offsetY, int playerX, int playerY ) {
         for (int i = 0; i < crystalList.size(); i++) {
             crystalList.get(i).draw(g, resX, resY, offsetX, offsetY);
@@ -50,6 +58,8 @@ public class Mobs {
         }
 
     }
+
+    //damages hit enemies, adds crystals with a 10% chance, despawsn dead enemies
 
     public void shootMobs(int x1, int y1, int x2, int y2) {
         for (int i = 0; i < mobList.size(); i++) {
@@ -69,6 +79,8 @@ public class Mobs {
             }
         }
     }
+
+    //checks if an enemy is on the imaginary line from the player through logical mouse cursor position,
 
     private boolean checkHit(int x1, int y1, int x2, int y2, int x0, int y0, int r) {
         boolean pointToLine = (r > Math.abs((y2 - y1) * x0 - (x2 - x1) * y0 + x2 * y1 - y2 * x1) / Math.sqrt(Math.pow(y2 - y1, 2) + Math.pow(x2 - x1, 2)));

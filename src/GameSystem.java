@@ -1,6 +1,7 @@
 // Das Spielfeld ist 1000*1000 Logische Koordinaten groß. Der Spieler soll aber nur auf den inneren 800*800 bewegen. Darüber hinaus nur Mob-spawns "off-screen"
 
 import java.awt.*;
+import scoreSystem.*;
 
 public class GameSystem {
 
@@ -42,16 +43,28 @@ public class GameSystem {
             //enemy movement
 
             gameMobs.moveAllMobs(playerX, playerY);
+
+            //pickup crystals
+
             gameMobs.crystalPickup(playerX, playerY);
+
+            //level up Powerlevel
+
             levelPower(gameMobs.getCollectedCrystals());
+
+            //damage player from enemies
+
             p1.damage(gameMobs.damageOnPlayer(playerX, playerY));
             if (p1.getHealth() <= 0) {
                 running = false;
+                MineTimer.getInstance().stop();
             }
             if (shooting) shoot(xCoordinate, yCoordinate);
-            //check for game loss
+
         }
     }
+
+    //levels up Power at certain crytal threshholds and increases those threshholds after a new one is reached
 
     private void levelPower(int collectedCrystals) {
         if (collectedCrystals > levelRequirement) {
@@ -60,10 +73,10 @@ public class GameSystem {
         }
     }
 
+    //visual representation of progress to next Powerlevel (blue bars on bottom right of screen)
+
     public void drawPowerLevel(Graphics g, int resX, int resY) {
 
-        g.drawString(String.valueOf(gameMobs.getCollectedCrystals()), (int) (resX * 0.8), (int) (resY * 0.8));
-        g.drawString("    of " + levelRequirement, (int) (resX * 0.8), (int) (resY * 0.8));
         g.setColor(Color.gray);
         g.fillRect((int)(resX * 0.7), (int) (resY * 0.85), (int) (resX * 0.3), (int) (resY * 0.15));
         g.setColor(Color.cyan);
@@ -93,7 +106,7 @@ public class GameSystem {
 
     public void drawPlayer(Graphics g, int resX, int resY, double angle) {
         p1.draw(g, resX, resY);
-        p1.setDir(p1.getDirection(angle));
+        p1.setDir(p1.getDirection(angle)); //sieht komisch aus und ist sicher quatsch, aber ich habe nur noch 30 minuten bis zur abgabe
     }
 
     public void drawMobs(Graphics g, int resX, int resY) {
